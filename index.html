@@ -3,456 +3,409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>香港银行开户模拟指南</title>
+    <title>香港虚拟银行线上开户模拟</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- 进度条 -->
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="progress-text" id="progressText">步骤 1 / 7</div>
+<div class="app-container">
+    <!-- 进度条 -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">步骤 1 / 6</div>
 
-        <!-- Step 1: 欢迎页 -->
-        <div class="step active" id="step1">
-            <div class="step-icon">🏦</div>
-            <h1>香港银行开户模拟</h1>
-            <p class="subtitle">开户前的全流程演练指南</p>
-            <div class="info-card">
-                <h3>为什么需要演练？</h3>
-                <ul>
-                    <li>避免因材料不全白跑一趟</li>
-                    <li>熟悉银行面谈常见问题</li>
-                    <li>了解各银行开户门槛差异</li>
-                    <li>提高一次通过率</li>
-                </ul>
-            </div>
-            <div class="info-card">
-                <h3>本模拟包含</h3>
-                <div class="flow-steps">
-                    <span class="flow-item">📋 材料准备</span>
-                    <span class="flow-arrow">→</span>
-                    <span class="flow-item">🏦 银行选择</span>
-                    <span class="flow-arrow">→</span>
-                    <span class="flow-item">🎫 排队取号</span>
-                    <span class="flow-arrow">→</span>
-                    <span class="flow-item">📝 填表</span>
-                    <span class="flow-arrow">→</span>
-                    <span class="flow-item">💬 面谈</span>
-                    <span class="flow-arrow">→</span>
-                    <span class="flow-item">✅ 完成</span>
-                </div>
-            </div>
-            <button class="btn-primary" onclick="nextStep()">开始模拟 →</button>
+    <!-- Step 1: 欢迎页 -->
+    <div class="step active" id="step1">
+        <div class="step-icon">📱</div>
+        <h1>香港虚拟银行<br>线上开户模拟</h1>
+        <p class="subtitle">众安 ZA Bank · 天星 Airstar Bank</p>
+
+        <div class="info-card">
+            <h3>什么是虚拟银行？</h3>
+            <ul>
+                <li>香港金管局发牌的正规持牌银行</li>
+                <li>100% 线上操作，无需到柜台</li>
+                <li>手机App即可完成开户（在港期间）</li>
+                <li>存款受香港存款保障计划保护（上限50万港币）</li>
+            </ul>
         </div>
 
-        <!-- Step 2: 准备材料 -->
-        <div class="step" id="step2">
-            <div class="step-icon">📋</div>
-            <h2>第一步：准备材料</h2>
-            <p class="subtitle">出发前请确认以下材料已备齐</p>
-            
-            <div class="checklist">
-                <label class="check-item">
-                    <input type="checkbox" class="check-input" data-required="true">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>大陆身份证</strong>（原件）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input" data-required="true">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>港澳通行证</strong>（有效签注）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input" data-required="true">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>过关小票</strong>（入境时保留）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input" data-required="true">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>地址证明</strong>（3个月内水电煤账单/银行账单/信用卡账单）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>工作证明/收入证明</strong>（在职证明或近3个月工资流水）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>税务编号</strong>（大陆身份证号即可）
-                    </span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" class="check-input">
-                    <span class="check-mark"></span>
-                    <span class="check-text">
-                        <strong>少量港币现金</strong>（建议带1万港币以上用于初始存款）
-                    </span>
-                </label>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-icon">💡</div>
-                <div class="tip-content">
-                    <strong>小贴士：</strong>地址证明是最容易忘带的材料！部分银行（如中银香港）可能接受内地住址的证明，但建议多带几份不同的备用。
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="checkMaterials()">材料已备齐 →</button>
+        <div class="info-card highlight">
+            <h3>本模拟覆盖内容</h3>
+            <div class="flow-steps">
+                <span class="flow-item">🛫 行前准备</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">📲 下载App</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">📝 填写信息</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">🤳 人脸验证</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-item">✅ 开户成功</span>
             </div>
         </div>
 
-        <!-- Step 3: 银行选择 -->
-        <div class="step" id="step3">
-            <div class="step-icon">🏦</div>
-            <h2>第二步：选择银行</h2>
-            <p class="subtitle">根据你的需求选择合适的银行</p>
-
-            <div class="bank-cards">
-                <div class="bank-card" onclick="selectBank(this, 'hsbc')">
-                    <div class="bank-logo">🔴</div>
-                    <h3>汇丰银行 HSBC</h3>
-                    <div class="bank-details">
-                        <p><strong>开户门槛：</strong>较高，建议存入5万港币+</p>
-                        <p><strong>优势：</strong>全球网点多，转账方便</p>
-                        <p><strong>适合：</strong>有海外资金往来需求</p>
-                        <p><strong>难度：</strong>⭐⭐⭐</p>
-                    </div>
-                </div>
-
-                <div class="bank-card" onclick="selectBank(this, 'bochk')">
-                    <div class="bank-logo">🔵</div>
-                    <h3>中银香港 BOCHK</h3>
-                    <div class="bank-details">
-                        <p><strong>开户门槛：</strong>相对宽松</p>
-                        <p><strong>优势：</strong>中文服务好，与内地中行联动</p>
-                        <p><strong>适合：</strong>初次开户，普通话沟通</p>
-                        <p><strong>难度：</strong>⭐⭐</p>
-                    </div>
-                </div>
-
-                <div class="bank-card" onclick="selectBank(this, 'sc')">
-                    <div class="bank-logo">🟢</div>
-                    <h3>渣打银行 SC</h3>
-                    <div class="bank-details">
-                        <p><strong>开户门槛：</strong>中等</p>
-                        <p><strong>优势：</strong>优先理财门槛不高</p>
-                        <p><strong>适合：</strong>有一定资产配置需求</p>
-                        <p><strong>难度：</strong>⭐⭐⭐</p>
-                    </div>
-                </div>
-
-                <div class="bank-card" onclick="selectBank(this, 'za')">
-                    <div class="bank-logo">🟣</div>
-                    <h3>ZA Bank 众安银行</h3>
-                    <div class="bank-details">
-                        <p><strong>开户门槛：</strong>低（虚拟银行）</p>
-                        <p><strong>优势：</strong>全线上开户，无需到店</p>
-                        <p><strong>适合：</strong>纯线上使用，门槛最低</p>
-                        <p><strong>难度：</strong>⭐</p>
-                    </div>
+        <div class="bank-compare">
+            <div class="compare-item">
+                <div class="compare-logo za">ZA</div>
+                <div class="compare-info">
+                    <strong>众安银行 ZA Bank</strong>
+                    <p>众安保险旗下 · 香港最大虚拟银行</p>
+                    <p>用户超100万 · 最快2分钟开户</p>
                 </div>
             </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="confirmBank()">确认选择 →</button>
+            <div class="compare-item">
+                <div class="compare-logo airstar">天星</div>
+                <div class="compare-info">
+                    <strong>天星银行 Airstar Bank</strong>
+                    <p>小米+富途合资 · 支持港美股</p>
+                    <p>界面简洁 · 与富途证券联动</p>
+                </div>
             </div>
         </div>
 
-        <!-- Step 4: 模拟排队取号 -->
-        <div class="step" id="step4">
-            <div class="step-icon">🎫</div>
-            <h2>第三步：到达银行</h2>
-            <p class="subtitle">模拟到店后的取号流程</p>
+        <button class="btn-primary" onclick="nextStep()">开始模拟 →</button>
+    </div>
 
-            <div class="info-card">
-                <h3>🕐 建议到店时间</h3>
-                <p>工作日上午 <strong>9:30-10:00</strong>（开门前到达最佳）</p>
-                <p>避开周一和月初，人会比较多</p>
-            </div>
+    <!-- Step 2: 行前准备 -->
+    <div class="step" id="step2">
+        <div class="step-icon">🛫</div>
+        <h2>第一步：行前准备</h2>
+        <p class="subtitle">出发去香港前需要做的事</p>
 
-            <div class="simulation-box">
-                <h3>模拟场景：进入银行大堂</h3>
-                <div class="dialogue">
-                    <div class="dialogue-item bank">
-                        <span class="role">大堂经理：</span>
-                        <span class="text">你好，请问办什么业务？</span>
-                    </div>
-                    <div class="dialogue-options">
-                        <p><strong>你应该说：</strong></p>
-                        <button class="option-btn correct" onclick="showResult(this, true)">
-                            "你好，我想开一个个人储蓄账户"
-                        </button>
-                        <button class="option-btn" onclick="showResult(this, false)">
-                            "我要开户炒股"
-                        </button>
-                        <button class="option-btn" onclick="showResult(this, false)">
-                            "随便看看"
-                        </button>
-                    </div>
-                    <div class="result-box" id="result4" style="display:none;"></div>
-                </div>
-            </div>
+        <div class="checklist">
+            <label class="check-item">
+                <input type="checkbox" class="check-input" data-required="true">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>港澳通行证</strong>（有效签注，确认未过期）</span>
+            </label>
+            <label class="check-item">
+                <input type="checkbox" class="check-input" data-required="true">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>大陆身份证</strong>（原件随身携带）</span>
+            </label>
+            <label class="check-item">
+                <input type="checkbox" class="check-input" data-required="true">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>提前下载App</strong>（可以在内地先下载，到港后再注册）</span>
+            </label>
+            <label class="check-item">
+                <input type="checkbox" class="check-input">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>内地手机号保持畅通</strong>（接收验证码用）</span>
+            </label>
+            <label class="check-item">
+                <input type="checkbox" class="check-input">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>准备一个常用邮箱</strong>（Gmail/QQ/163均可）</span>
+            </label>
+            <label class="check-item">
+                <input type="checkbox" class="check-input">
+                <span class="check-mark"></span>
+                <span class="check-text"><strong>入境小票拍照留存</strong>（部分银行可能需要）</span>
+            </label>
+        </div>
 
-            <div class="tip-card">
-                <div class="tip-icon">💡</div>
-                <div class="tip-content">
-                    <strong>注意：</strong>不要主动提及"投资""炒股""买保险"等目的。只说开储蓄账户即可，避免触发更严格的审核。
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="nextStep()">下一步 →</button>
+        <div class="tip-card">
+            <div class="tip-icon">⚠️</div>
+            <div class="tip-content">
+                <strong>关键提醒：</strong>必须人在香港才能开户！App会检测你的GPS定位和网络IP，在内地是无法完成注册的。建议过关后连上香港WiFi或开通漫游再操作。
             </div>
         </div>
 
-        <!-- Step 5: 填表模拟 -->
-        <div class="step" id="step5">
-            <div class="step-icon">📝</div>
-            <h2>第四步：填写表格</h2>
-            <p class="subtitle">模拟开户申请表的关键字段</p>
-
-            <div class="form-simulation">
-                <div class="form-group">
-                    <label>英文姓名 (Name in English)</label>
-                    <input type="text" placeholder="例：ZHANG SAN（与通行证一致）" class="form-input">
-                    <span class="form-hint">必须与港澳通行证上的拼音完全一致</span>
-                </div>
-
-                <div class="form-group">
-                    <label>中文姓名</label>
-                    <input type="text" placeholder="例：张三" class="form-input">
-                </div>
-
-                <div class="form-group">
-                    <label>职业 (Occupation)</label>
-                    <select class="form-input">
-                        <option value="">请选择...</option>
-                        <option value="employee">公司职员 Employee</option>
-                        <option value="manager">管理人员 Manager</option>
-                        <option value="self-employed">自雇人士 Self-employed</option>
-                        <option value="business">企业主 Business Owner</option>
-                        <option value="freelance">自由职业 Freelancer</option>
-                    </select>
-                    <span class="form-hint">建议选择稳定职业，避免选"无业"或"自由职业"</span>
-                </div>
-
-                <div class="form-group">
-                    <label>年收入 (Annual Income)</label>
-                    <select class="form-input">
-                        <option value="">请选择...</option>
-                        <option value="10-30">HKD 100,000 - 300,000</option>
-                        <option value="30-50">HKD 300,000 - 500,000</option>
-                        <option value="50-100">HKD 500,000 - 1,000,000</option>
-                        <option value="100+">HKD 1,000,000+</option>
-                    </select>
-                    <span class="form-hint">与后续面谈回答保持一致即可，不需要提供证明</span>
-                </div>
-
-                <div class="form-group">
-                    <label>开户目的 (Purpose of Account)</label>
-                    <div class="checkbox-group">
-                        <label class="inline-check"><input type="checkbox" checked> 储蓄 Savings</label>
-                        <label class="inline-check"><input type="checkbox"> 工资 Salary</label>
-                        <label class="inline-check"><input type="checkbox"> 投资 Investment</label>
-                        <label class="inline-check"><input type="checkbox"> 贸易 Trade</label>
-                    </div>
-                    <span class="form-hint warning">⚠️ 建议只勾选"储蓄"，勾选"投资"或"贸易"可能触发额外审核</span>
-                </div>
-
-                <div class="form-group">
-                    <label>资金来源 (Source of Funds)</label>
-                    <div class="checkbox-group">
-                        <label class="inline-check"><input type="checkbox" checked> 工资收入 Salary</label>
-                        <label class="inline-check"><input type="checkbox"> 储蓄 Savings</label>
-                        <label class="inline-check"><input type="checkbox"> 投资收益 Investment Returns</label>
-                        <label class="inline-check"><input type="checkbox"> 经营收入 Business Income</label>
-                    </div>
-                    <span class="form-hint">选择与你实际情况相符的选项</span>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-icon">💡</div>
-                <div class="tip-content">
-                    <strong>填表要点：</strong>
-                    <br>1. 英文名必须与通行证完全一致（包括空格）
-                    <br>2. 地址写内地住址即可，用拼音
-                    <br>3. 联系电话填内地手机号（+86开头）
-                    <br>4. 保持信息前后一致
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="nextStep()">下一步 →</button>
+        <div class="tip-card success">
+            <div class="tip-icon">💡</div>
+            <div class="tip-content">
+                <strong>省时技巧：</strong>可以在内地先下载好App、看好界面。到了香港连上网络后直接开始注册，整个流程只需5-10分钟。
             </div>
         </div>
 
-        <!-- Step 6: 面谈模拟 -->
-        <div class="step" id="step6">
-            <div class="step-icon">💬</div>
-            <h2>第五步：面谈问答</h2>
-            <p class="subtitle">银行职员常见提问及建议回答</p>
-
-            <div class="interview-section">
-                <div class="qa-card">
-                    <div class="question">
-                        <span class="q-badge">Q1</span>
-                        你来香港的目的是什么？
-                    </div>
-                    <div class="answer">
-                        <span class="a-badge">建议回答</span>
-                        <p>"来旅游/购物，顺便开个账户方便以后来香港消费用。"</p>
-                    </div>
-                    <div class="answer-warning">
-                        ❌ 不要说：来开户的 / 来投资的 / 朋友推荐来开户
-                    </div>
-                </div>
-
-                <div class="qa-card">
-                    <div class="question">
-                        <span class="q-badge">Q2</span>
-                        你从事什么工作？月收入大约多少？
-                    </div>
-                    <div class="answer">
-                        <span class="a-badge">建议回答</span>
-                        <p>"我在XX公司做XX（具体职位），月薪大约X万人民币。"</p>
-                    </div>
-                    <div class="answer-warning">
-                        ❌ 不要说：没有固定工作 / 做代购 / 收入不稳定
-                    </div>
-                </div>
-
-                <div class="qa-card">
-                    <div class="question">
-                        <span class="q-badge">Q3</span>
-                        你打算存多少钱？资金从哪里来？
-                    </div>
-                    <div class="answer">
-                        <span class="a-badge">建议回答</span>
-                        <p>"先存X万港币，资金来源是我的工资储蓄。"</p>
-                    </div>
-                    <div class="answer-warning">
-                        ❌ 不要说：要转很多钱过来 / 帮别人存钱 / 金额说不清
-                    </div>
-                </div>
-
-                <div class="qa-card">
-                    <div class="question">
-                        <span class="q-badge">Q4</span>
-                        这个账户主要用来做什么？
-                    </div>
-                    <div class="answer">
-                        <span class="a-badge">建议回答</span>
-                        <p>"主要是储蓄，偶尔来香港旅游消费时使用。"</p>
-                    </div>
-                    <div class="answer-warning">
-                        ❌ 不要说：炒股 / 买保险 / 转账到其他地方
-                    </div>
-                </div>
-
-                <div class="qa-card">
-                    <div class="question">
-                        <span class="q-badge">Q5</span>
-                        你有没有其他银行的账户？
-                    </div>
-                    <div class="answer">
-                        <span class="a-badge">建议回答</span>
-                        <p>"在内地有XX银行的储蓄账户。"（如实回答即可）</p>
-                    </div>
-                    <div class="answer-warning">
-                        ❌ 不要说：我在很多银行都开了户 / 隐瞒已有香港账户
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-icon">💡</div>
-                <div class="tip-content">
-                    <strong>面谈核心原则：</strong>
-                    <br>1. 保持自然，不要像背书一样
-                    <br>2. 与表格填写的信息保持一致
-                    <br>3. 简短回答，不要主动说太多
-                    <br>4. 表现出是"顺便"开户，不是"专程"来的
-                    <br>5. 如果听不懂粤语，可以说"可以说普通话吗？"
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="nextStep()">下一步 →</button>
-            </div>
-        </div>
-
-        <!-- Step 7: 开户成功 -->
-        <div class="step" id="step7">
-            <div class="step-icon">🎉</div>
-            <h2>恭喜！模拟完成</h2>
-            <p class="subtitle">你已经熟悉了整个开户流程</p>
-
-            <div class="success-card">
-                <h3>✅ 开户成功后你会收到：</h3>
-                <ul>
-                    <li>银行卡（部分银行当场发卡，部分邮寄）</li>
-                    <li>网银/手机银行登录信息</li>
-                    <li>编码器或安全密码（用于网银转账）</li>
-                </ul>
-            </div>
-
-            <div class="info-card">
-                <h3>⚠️ 开户后注意事项</h3>
-                <ul>
-                    <li><strong>激活网银：</strong>尽快下载手机银行APP并激活</li>
-                    <li><strong>保持账户活跃：</strong>建议每月至少有一笔交易，避免账户被冻结</li>
-                    <li><strong>最低存款：</strong>注意银行最低存款要求，低于标准可能被收管理费</li>
-                    <li><strong>保留资料：</strong>妥善保管所有开户文件和密码</li>
-                    <li><strong>CRS申报：</strong>香港与内地有税务信息交换，大额资金注意合规</li>
-                </ul>
-            </div>
-
-            <div class="info-card">
-                <h3>📱 常用银行APP下载</h3>
-                <ul>
-                    <li>汇丰：HSBC HK App</li>
-                    <li>中银香港：BOCHK App</li>
-                    <li>渣打：SC Mobile HK</li>
-                    <li>众安：ZA Bank App</li>
-                </ul>
-            </div>
-
-            <div class="tip-card">
-                <div class="tip-icon">🔄</div>
-                <div class="tip-content">
-                    <strong>温馨提示：</strong>如果第一次被拒，不要灰心！可以换一家分行或换一家银行再试。中银香港的成功率通常最高。
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn-secondary" onclick="prevStep()">← 返回</button>
-                <button class="btn-primary" onclick="restart()">🔄 重新演练</button>
-            </div>
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-primary" onclick="nextStep()">下一步 →</button>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Step 3: 选择银行 & 下载App -->
+    <div class="step" id="step3">
+        <div class="step-icon">📲</div>
+        <h2>第二步：选择银行 & 下载App</h2>
+        <p class="subtitle">选择你要开户的银行</p>
+
+        <div class="bank-select-cards">
+            <div class="bank-select-card" onclick="selectBank(this, 'za')" id="bankZA">
+                <div class="bank-badge za">ZA</div>
+                <div class="bank-select-info">
+                    <h3>众安银行 ZA Bank</h3>
+                    <div class="bank-tags">
+                        <span class="tag green">开户极快</span>
+                        <span class="tag blue">100万+用户</span>
+                    </div>
+                    <ul>
+                        <li>最快2分钟完成开户</li>
+                        <li>支持内地手机号注册</li>
+                        <li>港澳通行证即可开户</li>
+                        <li>自带Visa借记卡</li>
+                        <li>支持FPS转数快</li>
+                    </ul>
+                    <div class="download-links">
+                        <span>下载：</span>
+                        <a href="#">App Store</a> ·
+                        <a href="#">Google Play</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bank-select-card" onclick="selectBank(this, 'airstar')" id="bankAirstar">
+                <div class="bank-badge airstar">天星</div>
+                <div class="bank-select-info">
+                    <h3>天星银行 Airstar Bank</h3>
+                    <div class="bank-tags">
+                        <span class="tag purple">小米系</span>
+                        <span class="tag orange">富途联动</span>
+                    </div>
+                    <ul>
+                        <li>小米+富途合资背景</li>
+                        <li>支持内地手机号</li>
+                        <li>港澳通行证开户</li>
+                        <li>可绑定富途证券</li>
+                        <li>界面简洁易用</li>
+                    </ul>
+                    <div class="download-links">
+                        <span>下载：</span>
+                        <a href="#">App Store</a> ·
+                        <a href="#">Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div class="tip-content">
+                <strong>建议：</strong>两个都开！反正都免费、都是线上操作。众安更大众，天星适合有港美股需求的用户。
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-primary" onclick="confirmBank()">确认选择 →</button>
+        </div>
+    </div>
+
+    <!-- Step 4: 填写信息模拟 -->
+    <div class="step" id="step4">
+        <div class="step-icon">📝</div>
+        <h2>第三步：填写个人信息</h2>
+        <p class="subtitle" id="step4Subtitle">模拟App内的注册流程</p>
+
+        <div class="phone-frame">
+            <div class="phone-header">
+                <span class="phone-title" id="phoneTitle">ZA Bank</span>
+            </div>
+            <div class="phone-body">
+                <div class="app-form">
+                    <div class="form-group">
+                        <label>手机号码</label>
+                        <div class="input-with-prefix">
+                            <span class="prefix">+86</span>
+                            <input type="tel" placeholder="输入你的内地手机号" class="form-input">
+                        </div>
+                        <span class="form-hint">将收到短信验证码，确保手机信号正常</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>证件类型</label>
+                        <select class="form-input">
+                            <option value="travel">港澳通行证（往来港澳通行证）</option>
+                            <option value="passport">护照</option>
+                        </select>
+                        <span class="form-hint">大多数内地居民使用港澳通行证</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>英文姓名</label>
+                        <input type="text" placeholder="ZHANG SAN（与证件一致）" class="form-input">
+                        <span class="form-hint warning">必须与港澳通行证上拼音完全一致！</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>中文姓名</label>
+                        <input type="text" placeholder="张三" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label>出生日期</label>
+                        <input type="date" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label>电子邮箱</label>
+                        <input type="email" placeholder="your@email.com" class="form-input">
+                        <span class="form-hint">用于接收账户通知和电子账单</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>住址（拼音/英文）</label>
+                        <input type="text" placeholder="如：ROOM 101, 1/F, NO.88 XX ROAD, SHENZHEN" class="form-input">
+                        <span class="form-hint">填写内地住址的拼音/英文即可</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>开户目的</label>
+                        <div class="checkbox-group">
+                            <label class="inline-check"><input type="checkbox" checked> 储蓄 Savings</label>
+                            <label class="inline-check"><input type="checkbox"> 日常消费</label>
+                        </div>
+                        <span class="form-hint">选"储蓄"最稳妥</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-icon">⚠️</div>
+            <div class="tip-content">
+                <strong>填写要点：</strong><br>
+                1. 英文名必须与通行证拼音完全一致<br>
+                2. 手机号确保能收到短信验证码<br>
+                3. 地址用拼音写内地住址即可<br>
+                4. 不需要香港地址或香港手机号
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-primary" onclick="nextStep()">下一步 →</button>
+        </div>
+    </div>
+
+    <!-- Step 5: 证件上传 & 人脸识别 -->
+    <div class="step" id="step5">
+        <div class="step-icon">🤳</div>
+        <h2>第四步：证件拍照 & 人脸验证</h2>
+        <p class="subtitle">这是最关键的一步</p>
+
+        <div class="simulation-box">
+            <h3>📷 第一步：拍摄证件</h3>
+            <div class="sim-screen">
+                <div class="camera-frame">
+                    <div class="camera-overlay">
+                        <div class="doc-outline"></div>
+                        <p>将港澳通行证放在框内</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sim-tips">
+                <p>✅ 确保光线充足，避免反光</p>
+                <p>✅ 四角完整在框内</p>
+                <p>✅ 证件信息清晰可读</p>
+                <p>❌ 不要用截图或复印件</p>
+            </div>
+        </div>
+
+        <div class="simulation-box">
+            <h3>🤳 第二步：人脸识别</h3>
+            <div class="sim-screen">
+                <div class="face-frame">
+                    <div class="face-circle"></div>
+                    <p>将面部放入圆框内</p>
+                    <p class="face-hint">按提示转头/眨眼/张嘴</p>
+                </div>
+            </div>
+            <div class="sim-tips">
+                <p>✅ 摘掉眼镜和帽子</p>
+                <p>✅ 确保面部光线均匀</p>
+                <p>✅ 跟随指示做动作（眨眼/转头）</p>
+                <p>❌ 不要在太暗或逆光环境操作</p>
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div class="tip-content">
+                <strong>常见失败原因：</strong><br>
+                1. 证件照片模糊或反光 → 找光线好的地方重拍<br>
+                2. 人脸识别失败 → 摘眼镜，正对摄像头<br>
+                3. 网络不稳定 → 切换到稳定WiFi<br>
+                4. 不在香港 → 必须在港GPS定位
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-primary" onclick="nextStep()">下一步 →</button>
+        </div>
+    </div>
+
+    <!-- Step 6: 开户成功 -->
+    <div class="step" id="step6">
+        <div class="step-icon">🎉</div>
+        <h2>开户成功！</h2>
+        <p class="subtitle">模拟演练完成，以下是重要提醒</p>
+
+        <div class="success-card">
+            <h3>✅ 开户完成后你将获得：</h3>
+            <ul>
+                <li>一个香港银行账户号码</li>
+                <li>App内虚拟借记卡（可立即消费）</li>
+                <li>FPS转数快 ID（即时收付款）</li>
+                <li>实体卡将邮寄到你的地址（如适用）</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>💰 如何存入第一笔资金？</h3>
+            <ul>
+                <li><strong>FPS转账：</strong>从其他香港账户转入（免费秒到）</li>
+                <li><strong>银行转账：</strong>从内地银行电汇（有手续费）</li>
+                <li><strong>现金存入：</strong>部分便利店/ATM支持</li>
+                <li><strong>他人转入：</strong>让朋友通过FPS转给你</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>⚠️ 开户后注意事项</h3>
+            <ul>
+                <li><strong>保持活跃：</strong>每月至少登录一次App，避免休眠</li>
+                <li><strong>设置密码：</strong>开户后立即设置交易密码和登录密码</li>
+                <li><strong>绑定邮箱：</strong>确认邮箱已验证，接收重要通知</li>
+                <li><strong>注意汇率：</strong>如需换汇，对比各平台汇率</li>
+                <li><strong>免管理费：</strong>虚拟银行一般无最低余额要求</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🔗 两家银行对比总结</h3>
+            <table class="compare-table">
+                <thead>
+                    <tr><th></th><th>众安 ZA</th><th>天星 Airstar</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>开户速度</td><td>最快2分钟</td><td>约5-10分钟</td></tr>
+                    <tr><td>内地手机号</td><td>✅ 支持</td><td>✅ 支持</td></tr>
+                    <tr><td>港澳通行证</td><td>✅</td><td>✅</td></tr>
+                    <tr><td>虚拟卡</td><td>Visa</td><td>Mastercard</td></tr>
+                    <tr><td>特色</td><td>用户多，生态全</td><td>富途联动，港美股</td></tr>
+                    <tr><td>最低余额</td><td>无要求</td><td>无要求</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-card success">
+            <div class="tip-icon">🔄</div>
+            <div class="tip-content">
+                <strong>建议两个都开！</strong>都免费、流程一样简单。多一个账户多一份选择。
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-primary" onclick="restart()">🔄 重新演练</button>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>

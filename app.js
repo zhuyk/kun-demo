@@ -1,20 +1,17 @@
 // 当前步骤
 let currentStep = 1;
-const totalSteps = 7;
+const totalSteps = 6;
 let selectedBank = null;
 
 // 切换步骤
 function showStep(step) {
-    // 隐藏所有步骤
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    
-    // 显示目标步骤
     const targetStep = document.getElementById('step' + step);
     if (targetStep) {
         targetStep.classList.add('active');
         currentStep = step;
         updateProgress();
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -41,110 +38,53 @@ function updateProgress() {
     text.textContent = '步骤 ' + currentStep + ' / ' + totalSteps;
 }
 
-// 检查材料
-function checkMaterials() {
-    const requiredItems = document.querySelectorAll('.check-input[data-required="true"]');
-    let allChecked = true;
-    
-    requiredItems.forEach(item => {
-        if (!item.checked) {
-            allChecked = false;
-        }
-    });
-    
-    if (!allChecked) {
-        // 高亮未勾选的必要项
-        requiredItems.forEach(item => {
-            if (!item.checked) {
-                item.closest('.check-item').style.background = '#fff5f5';
-                setTimeout(() => {
-                    item.closest('.check-item').style.background = '';
-                }, 2000);
-            }
-        });
-        
-        if (confirm('还有必要材料未勾选！\n\n标记为必带的材料（前4项）缺一不可。\n\n是否仍要继续？')) {
-            nextStep();
-        }
-    } else {
-        nextStep();
-    }
-}
-
 // 选择银行
 function selectBank(element, bank) {
-    // 移除其他选中状态
-    document.querySelectorAll('.bank-card').forEach(card => {
+    document.querySelectorAll('.bank-select-card').forEach(card => {
         card.classList.remove('selected');
     });
-    
-    // 选中当前
     element.classList.add('selected');
     selectedBank = bank;
+
+    // 更新后续步骤中的银行名称
+    const phoneTitle = document.getElementById('phoneTitle');
+    if (bank === 'za') {
+        phoneTitle.textContent = 'ZA Bank 众安银行';
+    } else {
+        phoneTitle.textContent = 'Airstar Bank 天星银行';
+    }
 }
 
 // 确认银行选择
 function confirmBank() {
     if (!selectedBank) {
-        alert('请先选择一家银行');
+        // 高亮提示选择
+        document.querySelectorAll('.bank-select-card').forEach(card => {
+            card.style.animation = 'shake 0.3s';
+            setTimeout(() => { card.style.animation = ''; }, 300);
+        });
+        alert('请先选择一家银行（也可以之后两个都开）');
         return;
     }
     nextStep();
 }
 
-// 显示对话结果
-function showResult(btn, isCorrect) {
-    const resultBox = document.getElementById('result4');
-    
-    // 移除之前的样式
-    document.querySelectorAll('.option-btn').forEach(b => {
-        b.classList.remove('chosen', 'wrong');
-    });
-    
-    if (isCorrect) {
-        btn.classList.add('chosen');
-        resultBox.className = 'result-box success';
-        resultBox.innerHTML = '✅ <strong>正确！</strong>直接说明开储蓄账户即可，简单明了，不会引起额外审核。';
-    } else {
-        btn.classList.add('wrong');
-        // 高亮正确答案
-        document.querySelector('.option-btn.correct').classList.add('chosen');
-        resultBox.className = 'result-box fail';
-        resultBox.innerHTML = '❌ <strong>不太合适。</strong>避免提及投资、炒股等敏感目的。只说"开储蓄账户"是最稳妥的回答。';
-    }
-    
-    resultBox.style.display = 'block';
-}
-
 // 重新开始
 function restart() {
     selectedBank = null;
-    
-    // 重置所有checkbox
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
         cb.checked = cb.defaultChecked;
     });
-    
-    // 重置对话选项
-    document.querySelectorAll('.option-btn').forEach(b => {
-        b.classList.remove('chosen', 'wrong');
-    });
-    
-    const resultBox = document.getElementById('result4');
-    if (resultBox) {
-        resultBox.style.display = 'none';
-    }
-    
-    // 重置银行选择
-    document.querySelectorAll('.bank-card').forEach(card => {
+    document.querySelectorAll('.bank-select-card').forEach(card => {
         card.classList.remove('selected');
     });
-    
-    // 回到第一步
+    document.querySelectorAll('.form-input').forEach(input => {
+        if (input.tagName === 'INPUT') input.value = '';
+    });
     showStep(1);
 }
 
-// 页面加载完成
+// 页面加载
 document.addEventListener('DOMContentLoaded', function() {
     updateProgress();
 });
