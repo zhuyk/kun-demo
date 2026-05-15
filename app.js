@@ -7,12 +7,49 @@ let selectedBank = null;
 function startBank(bank) {
     selectedBank = bank;
     const phoneTitle = document.getElementById('phoneTitle');
+    const inviteBox = document.getElementById('zaInviteBox');
+    const inviteField = document.getElementById('inviteCodeField');
+
     if (bank === 'za') {
         phoneTitle.textContent = 'ZA Bank 众安银行';
+        inviteBox.style.display = 'block';
+        inviteField.style.display = 'block';
     } else {
         phoneTitle.textContent = '象象银行 EleBank';
+        inviteBox.style.display = 'none';
+        inviteField.style.display = 'none';
     }
     showStep(1);
+}
+
+// 复制邀请码
+function copyInviteCode() {
+    const code = 'Q8Q2S9';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(function() {
+            showCopyToast();
+        });
+    } else {
+        // fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = code;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showCopyToast();
+    }
+}
+
+function showCopyToast() {
+    const hint = document.querySelector('.invite-code-hint');
+    const original = hint.textContent;
+    hint.textContent = '✅ 已复制！开户时粘贴到邀请码栏即可';
+    hint.style.color = '#00b894';
+    setTimeout(function() {
+        hint.textContent = original;
+        hint.style.color = '';
+    }, 2000);
 }
 
 // 返回首页

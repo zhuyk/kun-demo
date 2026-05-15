@@ -123,12 +123,25 @@
         <h2>第二步：填写个人信息</h2>
         <p class="subtitle">模拟App内的注册流程</p>
 
+        <!-- 众安邀请码提示 -->
+        <div class="invite-code-box" id="zaInviteBox">
+            <div class="invite-code-header">🎁 众安银行邀请码（开户时填写可获奖励）</div>
+            <div class="invite-code-value" onclick="copyInviteCode()">Q8Q2S9</div>
+            <div class="invite-code-hint">👆 点击复制 · 注册时填写在"邀请码/推荐码"栏</div>
+        </div>
+
         <div class="phone-frame">
             <div class="phone-header">
                 <span class="phone-title" id="phoneTitle">ZA Bank</span>
             </div>
             <div class="phone-body">
                 <div class="app-form">
+                    <div class="form-group za-only" id="inviteCodeField">
+                        <label>邀请码 / 推荐码</label>
+                        <input type="text" value="Q8Q2S9" class="form-input invite-input" readonly>
+                        <span class="form-hint" style="color:#00b894;">✅ 填写邀请码开户可获得额外奖励！</span>
+                    </div>
+
                     <div class="form-group">
                         <label>手机号码</label>
                         <div class="input-with-prefix">
