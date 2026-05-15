@@ -12,13 +12,13 @@
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
     </div>
-    <div class="progress-text" id="progressText">步骤 1 / 6</div>
+    <div class="progress-text" id="progressText"></div>
 
-    <!-- Step 1: 欢迎页 -->
-    <div class="step active" id="step1">
+    <!-- 首页：选择银行 -->
+    <div class="step active" id="stepHome">
         <div class="step-icon">📱</div>
         <h1>香港虚拟银行<br>线上开户模拟</h1>
-        <p class="subtitle">众安 ZA Bank · 天星 Airstar Bank</p>
+        <p class="subtitle">选择要模拟开户的银行</p>
 
         <div class="info-card">
             <h3>什么是虚拟银行？</h3>
@@ -30,45 +30,36 @@
             </ul>
         </div>
 
-        <div class="info-card highlight">
-            <h3>本模拟覆盖内容</h3>
-            <div class="flow-steps">
-                <span class="flow-item">🛫 行前准备</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-item">📲 下载App</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-item">📝 填写信息</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-item">🤳 人脸验证</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-item">✅ 开户成功</span>
-            </div>
-        </div>
-
-        <div class="bank-compare">
-            <div class="compare-item">
-                <div class="compare-logo za">ZA</div>
-                <div class="compare-info">
+        <div class="bank-menu">
+            <button class="bank-menu-btn za" onclick="startBank('za')">
+                <div class="bank-menu-icon">ZA</div>
+                <div class="bank-menu-info">
                     <strong>众安银行 ZA Bank</strong>
-                    <p>众安保险旗下 · 香港最大虚拟银行</p>
-                    <p>用户超100万 · 最快2分钟开户</p>
+                    <p>香港最大虚拟银行 · 最快2分钟开户</p>
                 </div>
-            </div>
-            <div class="compare-item">
-                <div class="compare-logo airstar">天星</div>
-                <div class="compare-info">
-                    <strong>天星银行 Airstar Bank</strong>
-                    <p>小米+富途合资 · 支持港美股</p>
-                    <p>界面简洁 · 与富途证券联动</p>
+                <span class="menu-arrow">→</span>
+            </button>
+
+            <button class="bank-menu-btn airstar" onclick="startBank('airstar')">
+                <div class="bank-menu-icon">象象</div>
+                <div class="bank-menu-info">
+                    <strong>象象银行 EleBank</strong>
+                    <p>原天星银行 · 小米+富途合资</p>
                 </div>
-            </div>
+                <span class="menu-arrow">→</span>
+            </button>
         </div>
 
-        <button class="btn-primary" onclick="nextStep()">开始模拟 →</button>
+        <div class="tip-card success">
+            <div class="tip-icon">💡</div>
+            <div class="tip-content">
+                <strong>建议两个都开！</strong>都免费、都是线上操作，多一个账户多一份选择。
+            </div>
+        </div>
     </div>
 
-    <!-- Step 2: 行前准备 -->
-    <div class="step" id="step2">
+    <!-- Step 1: 行前准备 -->
+    <div class="step" id="step1">
         <div class="step-icon">🛫</div>
         <h2>第一步：行前准备</h2>
         <p class="subtitle">出发去香港前需要做的事</p>
@@ -121,83 +112,16 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-secondary" onclick="prevStep()">←</button>
+            <button class="btn-secondary" onclick="goHome()">← 首页</button>
             <button class="btn-primary" onclick="nextStep()">下一步 →</button>
         </div>
     </div>
 
-    <!-- Step 3: 选择银行 & 下载App -->
-    <div class="step" id="step3">
-        <div class="step-icon">📲</div>
-        <h2>第二步：选择银行 & 下载App</h2>
-        <p class="subtitle">选择你要开户的银行</p>
-
-        <div class="bank-select-cards">
-            <div class="bank-select-card" onclick="selectBank(this, 'za')" id="bankZA">
-                <div class="bank-badge za">ZA</div>
-                <div class="bank-select-info">
-                    <h3>众安银行 ZA Bank</h3>
-                    <div class="bank-tags">
-                        <span class="tag green">开户极快</span>
-                        <span class="tag blue">100万+用户</span>
-                    </div>
-                    <ul>
-                        <li>最快2分钟完成开户</li>
-                        <li>支持内地手机号注册</li>
-                        <li>港澳通行证即可开户</li>
-                        <li>自带Visa借记卡</li>
-                        <li>支持FPS转数快</li>
-                    </ul>
-                    <div class="download-links">
-                        <span>下载：</span>
-                        <a href="#">App Store</a> ·
-                        <a href="#">Google Play</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bank-select-card" onclick="selectBank(this, 'airstar')" id="bankAirstar">
-                <div class="bank-badge airstar">天星</div>
-                <div class="bank-select-info">
-                    <h3>天星银行 Airstar Bank</h3>
-                    <div class="bank-tags">
-                        <span class="tag purple">小米系</span>
-                        <span class="tag orange">富途联动</span>
-                    </div>
-                    <ul>
-                        <li>小米+富途合资背景</li>
-                        <li>支持内地手机号</li>
-                        <li>港澳通行证开户</li>
-                        <li>可绑定富途证券</li>
-                        <li>界面简洁易用</li>
-                    </ul>
-                    <div class="download-links">
-                        <span>下载：</span>
-                        <a href="#">App Store</a> ·
-                        <a href="#">Google Play</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tip-card">
-            <div class="tip-icon">💡</div>
-            <div class="tip-content">
-                <strong>建议：</strong>两个都开！反正都免费、都是线上操作。众安更大众，天星适合有港美股需求的用户。
-            </div>
-        </div>
-
-        <div class="btn-group">
-            <button class="btn-secondary" onclick="prevStep()">←</button>
-            <button class="btn-primary" onclick="confirmBank()">确认选择 →</button>
-        </div>
-    </div>
-
-    <!-- Step 4: 填写信息模拟 -->
-    <div class="step" id="step4">
+    <!-- Step 2: 填写信息模拟 -->
+    <div class="step" id="step2">
         <div class="step-icon">📝</div>
-        <h2>第三步：填写个人信息</h2>
-        <p class="subtitle" id="step4Subtitle">模拟App内的注册流程</p>
+        <h2>第二步：填写个人信息</h2>
+        <p class="subtitle">模拟App内的注册流程</p>
 
         <div class="phone-frame">
             <div class="phone-header">
@@ -280,10 +204,10 @@
         </div>
     </div>
 
-    <!-- Step 5: 证件上传 & 人脸识别 -->
-    <div class="step" id="step5">
+    <!-- Step 3: 证件上传 & 人脸识别 -->
+    <div class="step" id="step3">
         <div class="step-icon">🤳</div>
-        <h2>第四步：证件拍照 & 人脸验证</h2>
+        <h2>第三步：证件拍照 & 人脸验证</h2>
         <p class="subtitle">这是最关键的一步</p>
 
         <div class="simulation-box">
@@ -338,8 +262,8 @@
         </div>
     </div>
 
-    <!-- Step 6: 开户成功 -->
-    <div class="step" id="step6">
+    <!-- Step 4: 开户成功 -->
+    <div class="step" id="step4">
         <div class="step-icon">🎉</div>
         <h2>开户成功！</h2>
         <p class="subtitle">模拟演练完成，以下是重要提醒</p>
@@ -379,7 +303,7 @@
             <h3>🔗 两家银行对比总结</h3>
             <table class="compare-table">
                 <thead>
-                    <tr><th></th><th>众安 ZA</th><th>天星 Airstar</th></tr>
+                    <tr><th></th><th>众安 ZA</th><th>象象 EleBank</th></tr>
                 </thead>
                 <tbody>
                     <tr><td>开户速度</td><td>最快2分钟</td><td>约5-10分钟</td></tr>
@@ -392,16 +316,9 @@
             </table>
         </div>
 
-        <div class="tip-card success">
-            <div class="tip-icon">🔄</div>
-            <div class="tip-content">
-                <strong>建议两个都开！</strong>都免费、流程一样简单。多一个账户多一份选择。
-            </div>
-        </div>
-
         <div class="btn-group">
             <button class="btn-secondary" onclick="prevStep()">←</button>
-            <button class="btn-primary" onclick="restart()">🔄 重新演练</button>
+            <button class="btn-primary" onclick="goHome()">🏠 返回首页</button>
         </div>
     </div>
 </div>

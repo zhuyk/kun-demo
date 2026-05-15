@@ -1,18 +1,48 @@
-// 当前步骤
-let currentStep = 1;
-const totalSteps = 6;
+// 状态
+let currentStep = 0; // 0 = home
+const totalSteps = 4;
 let selectedBank = null;
+
+// 从首页选择银行进入流程
+function startBank(bank) {
+    selectedBank = bank;
+    const phoneTitle = document.getElementById('phoneTitle');
+    if (bank === 'za') {
+        phoneTitle.textContent = 'ZA Bank 众安银行';
+    } else {
+        phoneTitle.textContent = '象象银行 EleBank';
+    }
+    showStep(1);
+}
+
+// 返回首页
+function goHome() {
+    selectedBank = null;
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = cb.defaultChecked;
+    });
+    document.querySelectorAll('.form-input').forEach(input => {
+        if (input.tagName === 'INPUT') input.value = '';
+    });
+    showStep(0);
+}
 
 // 切换步骤
 function showStep(step) {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    const targetStep = document.getElementById('step' + step);
-    if (targetStep) {
-        targetStep.classList.add('active');
-        currentStep = step;
-        updateProgress();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (step === 0) {
+        document.getElementById('stepHome').classList.add('active');
+    } else {
+        const targetStep = document.getElementById('step' + step);
+        if (targetStep) {
+            targetStep.classList.add('active');
+        }
     }
+
+    currentStep = step;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // 下一步
@@ -26,6 +56,8 @@ function nextStep() {
 function prevStep() {
     if (currentStep > 1) {
         showStep(currentStep - 1);
+    } else if (currentStep === 1) {
+        goHome();
     }
 }
 
@@ -33,55 +65,17 @@ function prevStep() {
 function updateProgress() {
     const fill = document.getElementById('progressFill');
     const text = document.getElementById('progressText');
-    const percent = (currentStep / totalSteps) * 100;
-    fill.style.width = percent + '%';
-    text.textContent = '步骤 ' + currentStep + ' / ' + totalSteps;
-}
 
-// 选择银行
-function selectBank(element, bank) {
-    document.querySelectorAll('.bank-select-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-    element.classList.add('selected');
-    selectedBank = bank;
-
-    // 更新后续步骤中的银行名称
-    const phoneTitle = document.getElementById('phoneTitle');
-    if (bank === 'za') {
-        phoneTitle.textContent = 'ZA Bank 众安银行';
+    if (currentStep === 0) {
+        fill.style.width = '0%';
+        text.textContent = '选择银行';
     } else {
-        phoneTitle.textContent = 'Airstar Bank 天星银行';
-    }
-}
+        const percent = (currentStep / totalSteps) * 100;
+        fill.style.width = percent + '%';
 
-// 确认银行选择
-function confirmBank() {
-    if (!selectedBank) {
-        // 高亮提示选择
-        document.querySelectorAll('.bank-select-card').forEach(card => {
-            card.style.animation = 'shake 0.3s';
-            setTimeout(() => { card.style.animation = ''; }, 300);
-        });
-        alert('请先选择一家银行（也可以之后两个都开）');
-        return;
+        const bankName = selectedBank === 'za' ? '众安银行' : '象象银行';
+        text.textContent = bankName + ' · 步骤 ' + currentStep + ' / ' + totalSteps;
     }
-    nextStep();
-}
-
-// 重新开始
-function restart() {
-    selectedBank = null;
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.checked = cb.defaultChecked;
-    });
-    document.querySelectorAll('.bank-select-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-    document.querySelectorAll('.form-input').forEach(input => {
-        if (input.tagName === 'INPUT') input.value = '';
-    });
-    showStep(1);
 }
 
 // 页面加载

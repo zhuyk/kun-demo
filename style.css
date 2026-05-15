@@ -187,6 +187,82 @@ h2 {
     margin-top: 2px;
 }
 
+/* Bank Menu Buttons */
+.bank-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0;
+}
+
+.bank-menu-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px 16px;
+    background: #fff;
+    border: 2px solid #e9ecef;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    gap: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.bank-menu-btn:hover {
+    border-color: #00b894;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.bank-menu-btn:active {
+    transform: translateY(0);
+}
+
+.bank-menu-btn.za .bank-menu-icon {
+    background: linear-gradient(135deg, #e74c3c, #ff6b6b);
+}
+
+.bank-menu-btn.airstar .bank-menu-icon {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+}
+
+.bank-menu-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.bank-menu-info {
+    flex: 1;
+}
+
+.bank-menu-info strong {
+    font-size: 16px;
+    color: #2d3436;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.bank-menu-info p {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.menu-arrow {
+    font-size: 20px;
+    color: #adb5bd;
+    flex-shrink: 0;
+}
+
 /* Buttons */
 .btn-primary {
     display: block;
