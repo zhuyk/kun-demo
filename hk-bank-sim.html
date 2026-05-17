@@ -90,9 +90,9 @@
             color: white;
         }
         
-        /* WeLab Bank 品牌色 */
-        .welab-bank .logo {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        /* 天星银行 品牌色 */
+        .airstar-bank .logo {
+            background: linear-gradient(135deg, #00BFFF 0%, #1E90FF 100%);
             color: white;
         }
         
@@ -867,21 +867,21 @@
             margin-top: 4px;
         }
         
-        /* WeLab特有 */
+        /* 天星银行特有 */
         .welab-theme .progress-line-fill {
             background: linear-gradient(90deg, #FF6B35 0%, #F7931E 100%);
         }
         
-        .welab-theme .step-dot.active {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        .airstar-theme .step-dot.active {
+            background: linear-gradient(135deg, #00BFFF 0%, #1E90FF 100%);
         }
         
-        .welab-theme .btn-primary {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        .airstar-theme .btn-primary {
+            background: linear-gradient(135deg, #00BFFF 0%, #1E90FF 100%);
         }
         
-        .welab-theme .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        .airstar-theme .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.4);
         }
         
         /* 步骤说明 */
@@ -960,10 +960,10 @@
                 <div class="name">众安银行</div>
                 <div class="desc">香港首家虚拟银行</div>
             </div>
-            <div class="bank-card welab-bank" onclick="selectBank('welab')">
-                <div class="logo">🐘</div>
-                <div class="name">汇立银行</div>
-                <div class="desc">象象银行 WeLab</div>
+            <div class="bank-card airstar-bank" onclick="selectBank('airstar')">
+                <div class="logo">⭐</div>
+                <div class="name">天星银行</div>
+                <div class="desc">象象银行 · 小米系</div>
             </div>
         </div>
         
@@ -1797,8 +1797,8 @@
             if (bank === 'za') {
                 document.querySelector('.za-bank').classList.add('active');
             } else {
-                document.querySelector('.welab-bank').classList.add('active');
-                document.querySelector('.bank-selector').style.background = 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)';
+                document.querySelector('.airstar-bank').classList.add('active');
+                document.querySelector('.bank-selector').style.background = 'linear-gradient(135deg, #00BFFF 0%, #1E90FF 100%)';
             }
         }
         
@@ -2038,7 +2038,7 @@
         
         // 显示成功
         function showSuccess() {
-            const bankName = currentBank === 'za' ? '众安银行' : '汇立银行';
+            const bankName = currentBank === 'za' ? '众安银行' : '天星银行';
             document.getElementById('successBank').textContent = bankName;
             document.getElementById('successUser').textContent = formData.username || '未设置';
             
