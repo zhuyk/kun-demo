@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>众安银行线上开户模拟 - 香港虚拟银行</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 众安银行主题色 */
+        :root {
+            --primary: #6B5CE7;
+            --primary-dark: #5A4BD6;
+            --secondary: #FF6B6B;
+            --success: #51CF66;
+            --warning: #FFD43B;
+            --info: #339AF0;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+            min-height: 100vh;
+        }
+        
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), #8B7CF7);
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(107, 92, 231, 0.3);
+        }
+        
+        .app-header h1 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .app-header .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        .bank-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .benefits-card {
+            background: linear-gradient(135deg, #FFD43B, #FF922B);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px;
+            color: #333;
+        }
+        
+        .benefits-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .benefits-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .benefit-item {
+            background: rgba(255,255,255,0.9);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .benefit-item .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .benefit-item .value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .benefit-item .label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .invite-code-box {
+            background: linear-gradient(135deg, var(--secondary), #FF8E8E);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 15px 20px;
+            text-align: center;
+        }
+        
+        .invite-code-box .label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .invite-code-box .code {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-top: 5px;
+        }
+        
+        .invite-code-box .tip {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+        
+        .material-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 15px 20px;
+        }
+        
+        .material-item {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .material-item.checked {
+            background: rgba(81, 207, 102, 0.2);
+            border-color: var(--success);
+        }
+        
+        .material-item .icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+        
+        .material-item .name {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .material-item .status {
+            font-size: 12px;
+            margin-top: 5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .material-item .status.ready {
+            background: var(--success);
+            color: white;
+        }
+        
+        .material-item .status.pending {
+            background: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .phone-mockup {
+            background: #1A1A2E;
+            border: 3px solid #333;
+            border-radius: 30px;
+            padding: 10px;
+            margin: 20px;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .phone-screen {
+            background: white;
+            border-radius: 22px;
+            min-height: 500px;
+            overflow: hidden;
+        }
+        
+        .phone-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .phone-content {
+            padding: 20px 15px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            background: #f5f5f5;
+        }
+        
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+        
+        .step-dot.active {
+            background: var(--primary);
+            width: 25px;
+            border-radius: 5px;
+        }
+        
+        .step-dot.completed {
+            background: var(--success);
+        }
+        
+        .form-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .input-group {
+            margin-bottom: 12px;
+        }
+        
+        .input-group label {
+            display: block;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .input-hint {
+            font-size: 11px;
+            color: #999;
+            margin-top: 3px;
+        }
+        
+        .warning-text {
+            background: #FFF3CD;
+            border: 1px solid #FFD43B;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .success-text {
+            background: #D4EDDA;
+            border: 1px solid var(--success);
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .account-types {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .account-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .account-card.selected {
+            border-color: var(--primary);
+            background: rgba(107, 92, 231, 0.05);
+        }
+        
+        .account-card .check-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .account-card.selected .check-icon {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .account-card .icon {
+            font-size: 30px;
+        }
+        
+        .account-card .info h5 {
+            color: #333;
+            margin: 0 0 3px;
+            font-size: 15px;
+        }
+        
+        .account-card .info p {
+            color: #666;
+            font-size: 12px;
+            margin: 0;
+        }
+        
+        .reward-summary {
+            background: linear-gradient(135deg, #51CF66, #40C057);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px;
+        }
+        
+        .reward-summary h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .reward-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .reward-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reward-item .name {
+            opacity: 0.9;
+        }
+        
+        .reward-item .value {
+            font-weight: bold;
+        }
+        
+        .total-reward {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .total-reward .amount {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+        .total-reward .unit {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .complete-card {
+            background: linear-gradient(135deg, var(--primary), #8B7CF7);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px;
+            text-align: center;
+        }
+        
+        .complete-card .emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .complete-card h2 {
+            margin-bottom: 10px;
+        }
+        
+        .complete-card p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .action-tips {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 20px;
+        }
+        
+        .action-tips h4 {
+            color: var(--warning);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .action-tips li {
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .action-tips li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+        
+        .btn-za {
+            background: linear-gradient(135deg, var(--primary), #8B7CF7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            width: calc(100% - 40px);
+            margin: 0 20px 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(107, 92, 231, 0.4);
+        }
+        
+        .btn-za:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+        }
+        
+        .nav-buttons button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .btn-next {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .countdown {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .countdown-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) var(--progress), #333 var(--progress));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .countdown-circle::before {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: #1A1A2E;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .countdown-circle .time {
+            position: relative;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="bank-logo">🏦</div>
+            <h1>众安银行 ZA Bank</h1>
+            <p class="subtitle">香港虚拟银行 · 线上开户模拟</p>
+        </div>
+
+        <!-- Step 1: 欢迎页 -->
+        <div class="step active" id="step1">
+            <div class="benefits-card">
+                <h3>🎁 限时福利（截至2026年5月27日）</h3>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <span class="icon">💳</span>
+                        <span class="value">2.5%</span>
+                        <span class="label">刷卡股票回赠</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon">💰</span>
+                        <span class="value">¥200</span>
+                        <span class="label">专属红包</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon">📈</span>
+                        <span class="value">¥100+</span>
+                        <span class="label">股票基金券</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon">🏆</span>
+                        <span class="value">300+</span>
+                        <span class="label">累计可薅</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="invite-code-box">
+                <div class="label">专属邀请码</div>
+                <div class="code">X58629</div>
+                <div class="tip">⚠️ 开户时必须填写，忘记无法补填！</div>
+            </div>
+
+            <div class="info-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                <h3 style="color: white;">📱 为什么选择众安银行？</h3>
+                <ul style="color: rgba(255,255,255,0.8);">
+                    <li>✅ 香港第一家虚拟银行，100万+用户</li>
+                    <li>✅ 手机线上开户，无需到店排队</li>
+                    <li>✅ 零门槛、零管理费</li>
+                    <li>✅ 80万港币存款保障</li>
+                    <li>✅ 支持港美股、基金投资</li>
+                </ul>
+            </div>
+
+            <button class="btn-za" onclick="nextStep()">开始模拟开户 →</button>
+        </div>
+
+        <!-- Step 2: 材料准备 -->
+        <div class="step" id="step2">
+            <div class="step-indicator">
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+            </div>
+            
+            <h2 style="color: white; text-align: center; padding: 20px;">📋 开户前准备清单</h2>
+            
+            <div class="material-grid">
+                <div class="material-item checked" onclick="toggleMaterial(this)">
+                    <span class="icon">🪪</span>
+                    <div class="name">身份证</div>
+                    <span class="status ready">✓ 已准备</span>
+                </div>
+                <div class="material-item" onclick="toggleMaterial(this)">
+                    <span class="icon">📘</span>
+                    <div class="name">港澳通行证</div>
+                    <span class="status pending">待确认</span>
+                </div>
+                <div class="material-item" onclick="toggleMaterial(this)">
+                    <span class="icon">📱</span>
+                    <div class="name">手机（开通漫游）</div>
+                    <span class="status pending">待确认</span>
+                </div>
+                <div class="material-item" onclick="toggleMaterial(this)">
+                    <span class="icon">💳</span>
+                    <div class="name">内地银行卡</div>
+                    <span class="status pending">待确认</span>
+                </div>
+                <div class="material-item" onclick="toggleMaterial(this)">
+                    <span class="icon">📄</span>
+                    <div class="name">出入境记录</div>
+                    <span class="status pending">待确认</span>
+                </div>
+                <div class="material-item" onclick="toggleMaterial(this)">
+                    <span class="icon">📶</span>
+                    <div class="name">香港WiFi/流量</div>
+                    <span class="status pending">待确认</span>
+                </div>
+            </div>
+
+            <div class="action-tips">
+                <h4>📝 如何下载出入境记录？</h4>
+                <ol style="color: rgba(255,255,255,0.8); font-size: 13px; padding-left: 20px;">
+                    <li>过关后，微信搜索「移民局12367」</li>
+                    <li>点击「中国公民服务」→「出入境记录查询」</li>
+                    <li>下载PDF文件，<strong style="color: var(--warning);">文件名不要修改</strong></li>
+                </ol>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="prevStep()">← 返回</button>
+                <button class="btn-next" onclick="nextStep()">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: 开户步骤 -->
+        <div class="step" id="step3">
+            <div class="step-indicator">
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+            </div>
+
+            <h2 style="color: white; text-align: center; padding: 20px;">📱 线上开户流程</h2>
+
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="phone-header">众安银行 ZA Bank</div>
+                    
+                    <div class="form-card" style="margin: 15px; border-radius: 12px;">
+                        <h4>📝 基本信息</h4>
+                        <div class="input-group">
+                            <label>手机号码</label>
+                            <input type="tel" placeholder="大陆手机号 (+86)" value="+86 138****8888">
+                        </div>
+                        <div class="input-group">
+                            <label>电子邮箱</label>
+                            <input type="email" placeholder="用于接收通知">
+                        </div>
+                    </div>
+
+                    <div class="form-card" style="margin: 15px; background: #FFF3CD; border: 1px solid #FFD43B;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 24px;">⚠️</span>
+                            <div>
+                                <strong style="color: #856404;">邀请码（必填）</strong>
+                                <div style="font-size: 24px; font-weight: bold; color: #E03131; margin-top: 5px;">X58629</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">忘记填写邀请码将无法获得粉丝专属福利！</p>
+                    </div>
+
+                    <div class="form-card" style="margin: 15px;">
+                        <h4>🪪 证件认证</h4>
+                        <div style="background: #e9ecef; padding: 20px; border-radius: 8px; text-align: center; color: #666; font-size: 13px;">
+                            📷 拍摄身份证正反面<br>
+                            <span style="font-size: 12px;">请在光线充足的环境下拍摄</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-tips">
+                <h4>💡 温馨提示</h4>
+                <ul>
+                    <li>人必须在香港境内才能开户</li>
+                    <li>建议连接香港本地WiFi</li>
+                    <li>人脸识别时摘下眼镜成功率更高</li>
+                    <li>定位易在口岸附近失败，建议到市区再操作</li>
+                </ul>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="prevStep()">← 返回</button>
+                <button class="btn-next" onclick="nextStep()">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: 投资账户 -->
+        <div class="step" id="step4">
+            <div class="step-indicator">
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+            </div>
+
+            <h2 style="color: white; text-align: center; padding: 20px;">📈 开通投资账户</h2>
+            <p style="color: rgba(255,255,255,0.7); text-align: center; font-size: 14px;">⚠️ 这一步非常关键！回内地后无法补办！</p>
+
+            <div style="padding: 0 20px;">
+                <div class="account-card selected" onclick="toggleAccount(this, 'stock')">
+                    <div class="check-icon">✓</div>
+                    <span class="icon">📈</span>
+                    <div class="info">
+                        <h5>股票交易服务</h5>
+                        <p>可投资港股、美股</p>
+                    </div>
+                </div>
+
+                <div class="account-card selected" onclick="toggleAccount(this, 'fund')">
+                    <div class="check-icon">✓</div>
+                    <span class="icon">💹</span>
+                    <div class="info">
+                        <h5>基金交易服务</h5>
+                        <p>货币基金、债券基金等</p>
+                    </div>
+                </div>
+
+                <div class="account-card" onclick="toggleAccount(this, 'fx')">
+                    <div class="check-icon"></div>
+                    <span class="icon">💱</span>
+                    <div class="info">
+                        <h5>外币兑换服务</h5>
+                        <p>港币、美元等多币种</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-text" style="margin: 15px 20px;">
+                ⚠️ <strong>重要提醒：</strong>股票和基金账户<strong>必须</strong>在香港开户时同步开通！回到内地后无法申请，没开通就领不到任何福利！
+            </div>
+
+            <div class="action-tips">
+                <h4>📊 基金/股票回赠券说明</h4>
+                <ul>
+                    <li>买入指定金额基金/股票并持有一定天数</li>
+                    <li>可获得对应的现金回赠</li>
+                    <li>示例：买国美零售(00493) 1手约15港元</li>
+                    <li>或买华夏精选货币基金HKD（容易达标）</li>
+                </ul>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="prevStep()">← 返回</button>
+                <button class="btn-next" onclick="nextStep()">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 5: 达标条件 -->
+        <div class="step" id="step5">
+            <div class="step-indicator">
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+            </div>
+
+            <h2 style="color: white; text-align: center; padding: 20px;">🎯 达标条件</h2>
+            <p style="color: rgba(255,255,255,0.7); text-align: center; font-size: 14px;">完成以下任务即可领取福利</p>
+
+            <div style="padding: 0 20px;">
+                <div class="info-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                    <h3 style="color: white;">📋 任务清单（14天内完成）</h3>
+                    <ul style="color: rgba(255,255,255,0.8);">
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color: var(--success);">✓</strong> 开户成功
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color: var(--warning);">⏳</strong> 单笔存入 ≥1200港元或其等值
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong style="color: var(--warning);">⏳</strong> 同时持有存款、基金、股票
+                        </li>
+                        <li>
+                            <strong style="color: var(--warning);">⏳</strong> 维持资产 ≥1000港币，持续1-2个工作日
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                    <h3 style="color: white;">💰 本金建议</h3>
+                    <ul style="color: rgba(255,255,255,0.8);">
+                        <li><strong>最低：</strong>≥1000港币（仅达标拿红包）</li>
+                        <li><strong>推荐：</strong>5000港币（薅满基金券+股票券+200红包）</li>
+                        <li><strong>组合示例：</strong>
+                            <br>├── 存款：3000港币
+                            <br>├── 基金：华夏货币基金HKD 1000港币
+                            <br>└── 股票：国美零售 1手约15港币
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="prevStep()">← 返回</button>
+                <button class="btn-next" onclick="nextStep()">查看福利 →</button>
+            </div>
+        </div>
+
+        <!-- Step 6: 福利汇总 -->
+        <div class="step" id="step6">
+            <div class="step-indicator">
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot completed">✓</div>
+                <div class="step-dot active"></div>
+            </div>
+
+            <h2 style="color: white; text-align: center; padding: 20px;">🎁 福利汇总</h2>
+
+            <div class="reward-summary">
+                <h3>💎 基础福利（邀请码 X58629）</h3>
+                <div class="reward-item">
+                    <span class="name">💳 刷卡股票回赠</span>
+                    <span class="value">2.5%</span>
+                </div>
+                <div class="reward-item">
+                    <span class="name">📈 基金持仓回赠券</span>
+                    <span class="value">¥100+</span>
+                </div>
+                <div class="reward-item">
+                    <span class="name">💹 股票现金回赠券</span>
+                    <span class="value">¥50+</span>
+                </div>
+                <div class="reward-item">
+                    <span class="name">💱 货币兑换立减券</span>
+                    <span class="value">包含</span>
+                </div>
+                <div class="reward-item">
+                    <span class="name">🌍 海外汇款现金回赠</span>
+                    <span class="value">包含</span>
+                </div>
+                <div class="reward-item">
+                    <span class="name">🏦 7天港元定存加息券</span>
+                    <span class="value">2张19.9%</span>
+                </div>
+                
+                <div class="total-reward">
+                    <div class="amount">¥200</div>
+                    <div class="unit">粉丝专属红包（需达标领取）</div>
+                </div>
+            </div>
+
+            <div class="complete-card">
+                <div class="emoji">🎉</div>
+                <h2>模拟完成！</h2>
+                <p>你已经熟悉了众安银行线上开户的全流程</p>
+            </div>
+
+            <div class="action-tips">
+                <h4>📱 下一步行动</h4>
+                <ul>
+                    <li>打开众安银行APP（提前在香港下载）</li>
+                    <li>准备好所有材料，确保人在香港</li>
+                    <li>开户时<strong style="color: var(--warning);">务必填写邀请码 X58629</strong></li>
+                    <li>同步开通股票和基金账户</li>
+                    <li>达标后截图发给客服领取200元红包</li>
+                </ul>
+            </div>
+
+            <button class="btn-za" onclick="restart()">🔄 重新演练</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        let selectedAccounts = ['stock', 'fund'];
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            const progressText = document.getElementById('progressText');
+            if (progressText) {
+                progressText.textContent = `步骤 ${currentStep} / ${totalSteps}`;
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            const stepEl = document.getElementById('step' + step);
+            if (stepEl) {
+                stepEl.classList.add('active');
+            }
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function restart() {
+            currentStep = 1;
+            showStep(currentStep);
+        }
+
+        function toggleMaterial(el) {
+            el.classList.toggle('checked');
+            const status = el.querySelector('.status');
+            if (el.classList.contains('checked')) {
+                status.className = 'status ready';
+                status.textContent = '✓ 已准备';
+            } else {
+                status.className = 'status pending';
+                status.textContent = '待确认';
+            }
+        }
+
+        function toggleAccount(el, type) {
+            el.classList.toggle('selected');
+            const icon = el.querySelector('.check-icon');
+            if (el.classList.contains('selected')) {
+                icon.textContent = '✓';
+                if (!selectedAccounts.includes(type)) {
+                    selectedAccounts.push(type);
+                }
+            } else {
+                icon.textContent = '';
+                selectedAccounts = selectedAccounts.filter(a => a !== type);
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
