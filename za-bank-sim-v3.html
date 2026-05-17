@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>众安银行 ZA Bank - 手机开户</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        /* 手机框架 */
+        .phone-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: #fff;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 状态栏 */
+        .status-bar {
+            height: 44px;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        /* 顶部导航 */
+        .header {
+            background: #fff;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-back {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .header-back::before {
+            content: '‹';
+            font-size: 28px;
+            color: #333;
+        }
+        
+        .header-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .header-right {
+            width: 60px;
+            text-align: right;
+            font-size: 15px;
+            color: #00D795;
+            cursor: pointer;
+        }
+        
+        /* 进度条 */
+        .progress-bar {
+            height: 3px;
+            background: #eee;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #00D795;
+            transition: width 0.3s ease;
+        }
+        
+        /* 页面内容 */
+        .page-content {
+            padding: 20px 16px;
+            padding-bottom: 120px;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 标题区 */
+        .step-header {
+            margin-bottom: 20px;
+        }
+        
+        .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        
+        .step-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* 截图卡片 - 模拟APP界面 */
+        .app-screenshot {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+        
+        .app-screenshot img {
+            width: 100%;
+            display: block;
+        }
+        
+        .app-screenshot .hint {
+            padding: 10px 16px;
+            font-size: 12px;
+            color: #999;
+            background: #fafafa;
+            text-align: center;
+        }
+        
+        /* 表单区 */
+        .form-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .required {
+            color: #f00;
+        }
+        
+        .form-input {
+            width: 100%;
+            height: 48px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0 16px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #00D795;
+        }
+        
+        .form-input.phone-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .phone-prefix {
+            background: #f5f5f5;
+            padding: 12px;
+            border-right: 1px solid #ddd;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .phone-prefix + input {
+            border-radius: 0 8px 8px 0;
+            border-left: none;
+        }
+        
+        /* 邀请码提示 */
+        .invite-tip {
+            background: #FFF9E6;
+            border: 1px solid #FFE58F;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .invite-tip .icon {
+            font-size: 16px;
+        }
+        
+        .invite-tip .text {
+            font-size: 13px;
+            color: #8C6D1F;
+            line-height: 1.5;
+        }
+        
+        .invite-tip .code {
+            font-weight: 700;
+            color: #D48806;
+            font-size: 15px;
+        }
+        
+        /* 单选选项 */
+        .option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option-item {
+            background: #f8f8f8;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-item:active {
+            background: #f0f0f0;
+        }
+        
+        .option-item.selected {
+            border-color: #00D795;
+            background: #E8FFF7;
+        }
+        
+        .option-item .radio {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .option-item.selected .radio {
+            border-color: #00D795;
+            background: #00D795;
+        }
+        
+        .option-item.selected .radio::after {
+            content: '✓';
+            color: #fff;
+            font-size: 12px;
+        }
+        
+        .option-item .icon {
+            font-size: 32px;
+        }
+        
+        .option-item .info {
+            flex: 1;
+        }
+        
+        .option-item .title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        
+        .option-item .desc {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* 福利卡片 */
+        .bonus-card {
+            background: linear-gradient(135deg, #00D795 0%, #00B87A 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .bonus-card .title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .bonus-card .items {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* 底部按钮 */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 16px;
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            height: 50px;
+            background: #00D795;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .btn:active {
+            opacity: 0.8;
+        }
+        
+        .btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .btn.secondary {
+            background: #fff;
+            color: #00D795;
+            border: 2px solid #00D795;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-group .btn {
+            flex: 1;
+        }
+        
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: toastIn 0.3s ease;
+        }
+        
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        
+        /* 复选框 */
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            cursor: pointer;
+        }
+        
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .checkbox.checked {
+            background: #00D795;
+            border-color: #00D795;
+        }
+        
+        .checkbox.checked::after {
+            content: '✓';
+            color: #fff;
+            font-size: 12px;
+        }
+        
+        .checkbox-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .checkbox-text a {
+            color: #00D795;
+            text-decoration: none;
+        }
+        
+        /* 成功页面 */
+        .success-page {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #E8FFF7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+        }
+        
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 12px;
+        }
+        
+        .success-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        
+        .success-img {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .success-img img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- 状态栏 -->
+        <div class="status-bar">
+            <span class="time">9:41</span>
+            <div class="status-icons">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+            </div>
+        </div>
+        
+        <!-- 顶部导航 -->
+        <div class="header">
+            <div class="header-back" onclick="prevStep()"></div>
+            <div class="header-title" id="headerTitle">手机开户</div>
+            <div class="header-right">帮助</div>
+        </div>
+        
+        <!-- 进度条 -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 10%;"></div>
+        </div>
+        
+        <!-- 页面内容 -->
+        <div class="page-content">
+            
+            <!-- 步骤1: 选择证件类型 -->
+            <div class="page active" id="step1">
+                <div class="step-header">
+                    <div class="step-title">选择证件类型</div>
+                    <div class="step-desc">请选择您用于开户的身份证件类型</div>
+                </div>
+                
+                <div class="bonus-card">
+                    <div class="title">🎁 限时开户福利</div>
+                    <div class="items">
+                        • 港币活期存款利率 4.5%<br>
+                        • 跨地汇款免手续费<br>
+                        • 专属客户经理服务
+                    </div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/60dc4f791b6525dd876f0ab2a9f63094b484762d.png" alt="证件选择">
+                    <div class="hint">📱 参考APP截图</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📋 请选择证件类型</div>
+                    <div class="option-list">
+                        <div class="option-item selected" onclick="selectOption(this, 'idType', ' mainland_id')">
+                            <div class="radio"></div>
+                            <div class="icon">🪪</div>
+                            <div class="info">
+                                <div class="title">内地居民身份证</div>
+                                <div class="desc">适用于持有内地身份证的居民</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'idType', 'hk_id')">
+                            <div class="radio"></div>
+                            <div class="icon">🪪</div>
+                            <div class="info">
+                                <div class="title">香港居民身份证</div>
+                                <div class="desc">适用于持有香港身份证的居民</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤2: 填写手机号码 -->
+            <div class="page" id="step2">
+                <div class="step-header">
+                    <div class="step-title">填写手机号码</div>
+                    <div class="step-desc">请填写您的内地手机号码，用于接收验证码</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/adec86095ccbfe515836d79ae18afff032ef6918.png" alt="手机号码">
+                    <div class="hint">📱 请参考截图中的手机号码输入框位置</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📱 手机号码</div>
+                    <div class="form-group">
+                        <label class="form-label">内地手机号码 <span class="required">*</span></label>
+                        <div style="display:flex;">
+                            <span class="phone-prefix">+86</span>
+                            <input type="tel" class="form-input" id="phone" placeholder="请输入11位手机号码" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">电子邮箱 <span class="required">*</span></label>
+                        <input type="email" class="form-input" id="email" placeholder="用于接收重要通知">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤3: 填写邀请码 -->
+            <div class="page" id="step3">
+                <div class="step-header">
+                    <div class="step-title">填写邀请码</div>
+                    <div class="step-desc">填写邀请码可享受专属开户福利</div>
+                </div>
+                
+                <div class="invite-tip">
+                    <span class="icon">⚠️</span>
+                    <div class="text">
+                        <strong>重要提示：</strong><br>
+                        请务必填写专属邀请码 <span class="code">Q8Q2S9</span><br>
+                        忘记填写将无法补领开户福利！
+                    </div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/e43a8f1909cd0f8d06274542c44cd5a82b5d8ff6.png" alt="邀请码">
+                    <div class="hint">📱 请参考截图中的邀请码输入位置</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">🎁 专属邀请码</div>
+                    <div class="form-group">
+                        <label class="form-label">邀请码 <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="inviteCode" placeholder="请输入邀请码" maxlength="10" style="text-transform:uppercase; text-align:center; font-size:18px; letter-spacing:4px;">
+                        <div id="inviteHint" style="font-size:12px; color:#999; margin-top:8px; text-align:center;">填写邀请码可享专属开户福利</div>
+                    </div>
+                </div>
+                
+                <div class="bonus-card">
+                    <div class="title">🎁 邀请码福利</div>
+                    <div class="items">
+                        • 港币活期利率提升至 4.5%<br>
+                        • 专属客服一对一服务<br>
+                        • 开户成功后再送港币50元
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤4: 身份认证 -->
+            <div class="page" id="step4">
+                <div class="step-header">
+                    <div class="step-title">身份认证</div>
+                    <div class="step-desc">请按指示完成身份验证，需要用到您的身份证</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/b4c4ada8af97b6c999b09c00b7a6f84266c71da4.png" alt="身份认证">
+                    <div class="hint">📱 请按截图示意操作</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📸 证件认证</div>
+                    <div class="option-list">
+                        <div class="option-item" onclick="selectOption(this, 'idVerify', 'photo')">
+                            <div class="radio"></div>
+                            <div class="icon">📷</div>
+                            <div class="info">
+                                <div class="title">拍摄身份证人像面</div>
+                                <div class="desc">将身份证正面朝上，清晰拍摄</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'idVerify', 'face')">
+                            <div class="radio"></div>
+                            <div class="icon">👤</div>
+                            <div class="info">
+                                <div class="title">人脸识别验证</div>
+                                <div class="desc">请在光线充足的环境下完成</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤5: 税务居民身份 -->
+            <div class="page" id="step5">
+                <div class="step-header">
+                    <div class="step-title">税务居民身份</div>
+                    <div class="step-desc">根据监管要求，请如实填写税务相关信息</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">🌍 税务居民身份</div>
+                    <div class="option-list">
+                        <div class="option-item selected" onclick="selectOption(this, 'taxType', 'china')">
+                            <div class="radio"></div>
+                            <div class="icon">🇨🇳</div>
+                            <div class="info">
+                                <div class="title">仅中国内地税务居民</div>
+                                <div class="desc">仅在中国内地负有纳税义务</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'taxType', 'both')">
+                            <div class="radio"></div>
+                            <div class="icon">🌍</div>
+                            <div class="info">
+                                <div class="title">同时为其他地区税务居民</div>
+                                <div class="desc">需要填写其他国家/地区的纳税信息</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤6: 账户设置 -->
+            <div class="page" id="step6">
+                <div class="step-header">
+                    <div class="step-title">账户设置</div>
+                    <div class="step-desc">设置您的账户安全信息</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">🔐 设置账户密码</div>
+                    <div class="form-group">
+                        <label class="form-label">登录密码 <span class="required">*</span></label>
+                        <input type="password" class="form-input" id="password" placeholder="8-20位，包含字母和数字">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">确认密码 <span class="required">*</span></label>
+                        <input type="password" class="form-input" id="passwordConfirm" placeholder="请再次输入密码">
+                    </div>
+                </div>
+                
+                <div class="checkbox-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="checkbox-text">
+                        我已阅读并同意《个人银行账户管理协议》、《电子银行客户服务协议》、《隐私政策》及相关开户须知
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤7: 绑定银行卡 -->
+            <div class="page" id="step7">
+                <div class="step-header">
+                    <div class="step-title">绑定银行卡</div>
+                    <div class="step-desc">绑定您的银行卡用于资金转入转出</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/9cdfe533a7a1e1a8d32de9dc687146e42becab2b.png" alt="绑定银行卡">
+                    <div class="hint">📱 请按截图示意操作</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">💳 绑定银行卡</div>
+                    <div class="form-group">
+                        <label class="form-label">开户银行 <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="bankName" placeholder="如：中国工商银行">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">银行卡号 <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="bankCard" placeholder="请输入银行卡号" maxlength="19">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">银行预留手机号</label>
+                        <div style="display:flex;">
+                            <span class="phone-prefix">+86</span>
+                            <input type="tel" class="form-input" id="bankPhone" placeholder="银行预留手机号">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤8: 出入境记录 -->
+            <div class="page" id="step8">
+                <div class="step-header">
+                    <div class="step-title">出入境记录</div>
+                    <div class="step-desc">请查询并上传您的出入境记录证明</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/530d0e2828139657403f33799f78665849ffcf6d.png" alt="出入境记录">
+                    <div class="hint">📱 第一步：查询出入境记录</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📋 出入境记录查询</div>
+                    <div class="option-list">
+                        <div class="option-item" onclick="selectOption(this, 'exitEntry', 'query')">
+                            <div class="radio"></div>
+                            <div class="icon">🔍</div>
+                            <div class="info">
+                                <div class="title">移民局小程序查询</div>
+                                <div class="desc">微信搜索"移民局"小程序查询</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'exitEntry', 'upload')">
+                            <div class="radio"></div>
+                            <div class="icon">📤</div>
+                            <div class="info">
+                                <div class="title">上传出入境记录</div>
+                                <div class="desc">上传移民局出具的电子证明</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤9: 开通投资账户 -->
+            <div class="page" id="step9">
+                <div class="step-header">
+                    <div class="step-title">开通投资账户</div>
+                    <div class="step-desc">是否开通港美股投资账户</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/62d9d8bd0a473e8979f4b91d132643687ff29dc8.png" alt="移民局查询">
+                    <div class="hint">📱 开通投资账户可投资港美股</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📈 投资账户</div>
+                    <div class="option-list">
+                        <div class="option-item selected" onclick="selectOption(this, 'investAccount', 'open')">
+                            <div class="radio"></div>
+                            <div class="icon">📈</div>
+                            <div class="info">
+                                <div class="title">开通投资账户</div>
+                                <div class="desc">可投资港股、美股、ETF等</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'investAccount', 'later')">
+                            <div class="radio"></div>
+                            <div class="icon">⏰</div>
+                            <div class="info">
+                                <div class="title">稍后开通</div>
+                                <div class="desc">可在开户后单独开通</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤10: W-8BEN表格 -->
+            <div class="page" id="step10">
+                <div class="step-header">
+                    <div class="step-title">W-8BEN 表格</div>
+                    <div class="step-desc">美国税务局表格，用于声明非美国税务居民身份</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/cca4a097181dcf87c863a6b28b5f1d8b423c8505.png" alt="W-8BEN表格">
+                    <div class="hint">📱 请仔细阅读并签署W-8BEN表格</div>
+                </div>
+                
+                <div class="checkbox-item" onclick="toggleCheck(this)">
+                    <div class="checkbox checked"></div>
+                    <div class="checkbox-text">
+                        我确认本人不是美国公民或美国税务居民，并同意签署W-8BEN表格
+                    </div>
+                </div>
+                
+                <div class="checkbox-item" onclick="toggleCheck(this)">
+                    <div class="checkbox"></div>
+                    <div class="checkbox-text">
+                        我已阅读并理解 <a href="#">W-8BEN表格</a> 的内容及说明
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤11: 风险测评 -->
+            <div class="page" id="step11">
+                <div class="step-header">
+                    <div class="step-title">风险测评</div>
+                    <div class="step-desc">请完成风险承受能力评估问卷</div>
+                </div>
+                
+                <div class="app-screenshot">
+                    <img src="images/642ce35cf387b680968f2b8d21d68b23cf7eebf7.png" alt="风险测评">
+                    <div class="hint">📱 请按实际情况填写风险测评问卷</div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-section-title">📝 风险承受能力</div>
+                    <div class="option-list">
+                        <div class="option-item" onclick="selectOption(this, 'riskLevel', 'conservative')">
+                            <div class="radio"></div>
+                            <div class="info">
+                                <div class="title">保守型</div>
+                                <div class="desc">追求本金安全，收益稳定</div>
+                            </div>
+                        </div>
+                        <div class="option-item selected" onclick="selectOption(this, 'riskLevel', 'balanced')">
+                            <div class="radio"></div>
+                            <div class="info">
+                                <div class="title">平衡型</div>
+                                <div class="desc">追求一定收益，能承受一定风险</div>
+                            </div>
+                        </div>
+                        <div class="option-item" onclick="selectOption(this, 'riskLevel', 'growth')">
+                            <div class="radio"></div>
+                            <div class="info">
+                                <div class="title">成长型</div>
+                                <div class="desc">追求高收益，能承受较大风险</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤12: 提交成功 -->
+            <div class="page" id="step12">
+                <div class="success-page">
+                    <div class="success-icon">✓</div>
+                    <div class="success-title">开户申请已提交</div>
+                    <div class="success-desc">
+                        您的开户申请已成功提交！<br>
+                        预计 1-3 个工作日内完成审核<br>
+                        审核结果将通过短信和邮件通知您
+                    </div>
+                    
+                    <div class="success-img">
+                        <img src="images/11187b65a67a9ddab86c9b8341c5ffed5e2a20cd.png" alt="提交成功">
+                    </div>
+                    
+                    <div class="bonus-card" style="text-align:left;">
+                        <div class="title">🎁 您的专属福利</div>
+                        <div class="items">
+                            • 港币活期利率 4.5%（30天）<br>
+                            • 开户成功后存入首笔资金再送港币50元<br>
+                            • 专属客服经理一对一服务
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- 底部按钮 -->
+        <div class="bottom-bar" id="bottomBar">
+            <button class="btn" id="mainBtn" onclick="nextStep()">下一步</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentStep = 1;
+        const totalSteps = 12;
+        
+        // 步骤标题
+        const stepTitles = [
+            '手机开户',
+            '选择证件类型',
+            '填写手机号码',
+            '填写邀请码',
+            '身份认证',
+            '税务居民身份',
+            '账户设置',
+            '绑定银行卡',
+            '出入境记录',
+            '开通投资账户',
+            'W-8BEN表格',
+            '风险测评',
+            '开户成功'
+        ];
+        
+        // 表单数据
+        let formData = {
+            idType: 'mainland_id',
+            phone: '',
+            email: '',
+            inviteCode: '',
+            idVerify: '',
+            taxType: 'china',
+            password: '',
+            bankName: '',
+            bankCard: '',
+            bankPhone: '',
+            exitEntry: '',
+            investAccount: 'open',
+            riskLevel: 'balanced'
+        };
+        
+        // 更新步骤指示器
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('headerTitle').textContent = stepTitles[currentStep];
+            
+            // 更新按钮
+            const btn = document.getElementById('mainBtn');
+            const bottomBar = document.getElementById('bottomBar');
+            
+            if (currentStep === totalSteps) {
+                bottomBar.style.display = 'none';
+            } else {
+                bottomBar.style.display = 'block';
+                if (currentStep === 1) {
+                    btn.textContent = '开始开户';
+                } else {
+                    btn.textContent = '下一步';
+                }
+            }
+        }
+        
+        // 显示页面
+        function showPage(step) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+        
+        // 下一步
+        function nextStep() {
+            // 验证步骤2：手机号
+            if (currentStep === 2) {
+                const phone = document.getElementById('phone').value;
+                if (!phone || !/^1[3-9]\d{9}$/.test(phone)) {
+                    showToast('请输入正确的11位内地手机号码');
+                    return;
+                }
+                formData.phone = phone;
+            }
+            
+            // 验证步骤3：邀请码
+            if (currentStep === 3) {
+                const code = document.getElementById('inviteCode').value.toUpperCase();
+                if (!code) {
+                    showToast('请填写邀请码');
+                    return;
+                }
+                if (code !== 'Q8Q2S9') {
+                    showToast('邀请码不正确，请检查后重新填写');
+                    return;
+                }
+                formData.inviteCode = code;
+            }
+            
+            if (currentStep < totalSteps) {
+                showPage(currentStep + 1);
+            }
+        }
+        
+        // 上一步
+        function prevStep() {
+            if (currentStep > 1) {
+                showPage(currentStep - 1);
+            }
+        }
+        
+        // 选择选项
+        function selectOption(el, field, value) {
+            const parent = el.parentElement;
+            parent.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            el.classList.add('selected');
+            formData[field] = value;
+        }
+        
+        // 切换复选框
+        function toggleCheck(el) {
+            const checkbox = el.querySelector('.checkbox');
+            checkbox.classList.toggle('checked');
+        }
+        
+        // Toast提示
+        function showToast(msg) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 2000);
+        }
+        
+        // 邀请码输入监听
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeInput = document.getElementById('inviteCode');
+            const hint = document.getElementById('inviteHint');
+            
+            if (codeInput && hint) {
+                codeInput.addEventListener('input', function() {
+                    const code = this.value.toUpperCase();
+                    if (code === 'Q8Q2S9') {
+                        hint.textContent = '✓ 邀请码正确';
+                        hint.style.color = '#52c41a';
+                    } else if (code.length > 0) {
+                        hint.textContent = '请确认邀请码是否正确';
+                        hint.style.color = '#999';
+                    } else {
+                        hint.textContent = '填写邀请码可享专属开户福利';
+                        hint.style.color = '#999';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
