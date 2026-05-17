@@ -295,7 +295,358 @@
             color: #52c41a;
         }
         
-        /* 选项列表 */
+        /* 首页 */
+        .home-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+        
+        .home-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .home-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00D795 0%, #00B87A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .home-customer {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .home-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .home-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        
+        .home-title .green {
+            color: #00D795;
+        }
+        
+        .home-hero {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(180deg, #E8F5FF 0%, #F0FFF7 50%, #fff 100%);
+            border-radius: 20px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .home-hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, transparent 100%);
+        }
+        
+        .home-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .home-building {
+            font-size: 120px;
+            line-height: 1;
+        }
+        
+        .home-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            padding: 0 20px;
+        }
+        
+        .home-btn {
+            width: 280px;
+            height: 52px;
+            background: #00D795;
+            color: #fff;
+            border: none;
+            border-radius: 26px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+        
+        .home-login {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .home-login a {
+            color: #00D795;
+            text-decoration: none;
+        }
+        
+        .home-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #eee;
+            background: #fff;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .nav-item.active {
+            color: #00D795;
+        }
+        
+        .nav-item .nav-icon {
+            width: 24px;
+            height: 24px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: #E8FFF7;
+        }
+        
+        /* 证件类型页 */
+        .id-type-page {
+            padding: 0;
+        }
+        
+        .id-type-page .page-title {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .id-option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        
+        .id-option .id-icon {
+            width: 48px;
+            height: 48px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 16px;
+        }
+        
+        .id-option .id-info {
+            flex: 1;
+        }
+        
+        .id-option .id-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        
+        .id-option .id-desc {
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .id-option .id-radio {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .id-option.selected .id-radio {
+            border-color: #00D795;
+            background: #00D795;
+        }
+        
+        .id-option.selected .id-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        
+        /* 访港旅客页 */
+        .visitor-page {
+            padding: 0;
+        }
+        
+        .visitor-page .page-title {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            padding: 20px 20px 12px;
+        }
+        
+        .condition-list {
+            padding: 0 20px;
+        }
+        
+        .condition-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .condition-item:last-child {
+            border-bottom: none;
+        }
+        
+        .condition-item .cond-icon {
+            width: 40px;
+            height: 40px;
+            background: #E8FFF7;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+        
+        .condition-item .cond-text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+            padding-top: 2px;
+        }
+        
+        .condition-item .cond-text .link {
+            color: #00D795;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        .step-section {
+            padding: 0 20px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .step-num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00D795;
+            margin-right: 16px;
+            line-height: 1;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content .step-title-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 4px;
+        }
+        
+        .step-content .step-desc-text {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.5;
+        }
+        
+        .continue-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 20px;
+            font-size: 16px;
+            color: #00D795;
+            font-weight: 500;
+        }
+        
+        .continue-btn .arrow {
+            width: 36px;
+            height: 36px;
+            background: #00D795;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+        }
+        
+        /* 选项列表 - 通用 */
         .option-list {
             display: flex;
             flex-direction: column;
@@ -564,90 +915,132 @@
         <!-- 页面内容 -->
         <div class="page-content">
             
-            <!-- 步骤1: 选择证件类型 -->
+            <!-- 步骤1: 首页/开屏 -->
             <div class="page active" id="step1">
-                <div class="bonus-card">
-                    <div class="title">🎁 限时开户福利</div>
-                    <div class="items">
-                        ✓ 港币活期利率 4.5%<br>
-                        ✓ 跨行汇款免手续费<br>
-                        ✓ 开户成功送港币50元
+                <div class="home-page">
+                    <div class="home-header">
+                        <div class="home-logo">Z</div>
+                        <div class="home-customer">👤</div>
                     </div>
-                </div>
-                
-                <div class="page-title">选择证件类型</div>
-                <div class="page-desc">请选择您用于开户的身份证件</div>
-                
-                <div class="option-list">
-                    <div class="option-item selected" onclick="selectOption(this, 'idType', 'mainland_id')">
-                        <div class="radio"></div>
-                        <div class="icon">🪪</div>
-                        <div class="info">
-                            <div class="title">内地居民身份证</div>
-                            <div class="desc">适用于持有内地身份证的居民</div>
+                    
+                    <div class="home-content">
+                        <div class="home-title">
+                            香港第一<br>
+                            <span class="green">数字银行</span>
                         </div>
+                        
+                        <div class="home-hero">
+                            <div class="home-hero-content">
+                                <div class="home-building">🏙️</div>
+                                <div style="font-size:14px; color:#00D795; margin-top:8px; font-weight:600;">做好规矩 做好银行</div>
+                            </div>
+                        </div>
+                        
+                        <div class="home-desc">
+                            作为香港首家开业的数字银行，截至2024年6月30日，众安银行的用户数及存款均为香港众安银行中之最高。众安银行已完成了五间不同业务领域
+                        </div>
+                        
+                        <button class="home-btn" onclick="nextStep()">立即开户</button>
+                        <div class="home-login">已有账户？<a href="#">登录</a></div>
                     </div>
-                    <div class="option-item" onclick="selectOption(this, 'idType', 'hk_id')">
-                        <div class="radio"></div>
-                        <div class="icon">🪪</div>
-                        <div class="info">
-                            <div class="title">香港居民身份证</div>
-                            <div class="desc">适用于持有香港身份证的居民</div>
+                    
+                    <div class="home-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">🏠</div>
+                            <span>首页</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🔍</div>
+                            <span>探索</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">📈</div>
+                            <span>投资</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👤</div>
+                            <span>我的</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 步骤2: 手机号码 -->
+            <!-- 步骤2: 证件类型 -->
             <div class="page" id="step2">
-                <div class="step-indicator">
-                    <div class="step-dot active"></div>
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                </div>
-                
-                <div class="page-title">填写手机号码</div>
-                <div class="page-desc">请填写您的内地手机号码，用于接收验证码</div>
-                
-                <div class="form-group">
-                    <label class="form-label">手机号码 <span class="required">*</span></label>
-                    <div class="form-input phone-input">
-                        <span class="phone-prefix">+86</span>
-                        <input type="tel" id="phone" placeholder="请输入11位手机号码" maxlength="11">
+                <div class="id-type-page">
+                    <div class="page-title">你的证件类型</div>
+                    
+                    <div class="id-option" onclick="selectIdType(this, 'hk_id')">
+                        <div class="id-icon">🪪</div>
+                        <div class="id-info">
+                            <div class="id-title">香港居民身份证</div>
+                            <div class="id-desc">永久/非永久居民</div>
+                        </div>
+                        <div class="id-radio"></div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">电子邮箱 <span class="required">*</span></label>
-                    <input type="email" class="form-input" id="email" placeholder="用于接收重要通知">
+                    
+                    <div class="id-option selected" onclick="selectIdType(this, 'mainland_id')">
+                        <div class="id-icon" style="background:#E8FFF7;">🆔</div>
+                        <div class="id-info">
+                            <div class="id-title">中华人民共和国居民身份证</div>
+                            <div class="id-desc">访港旅客</div>
+                        </div>
+                        <div class="id-radio"></div>
+                    </div>
                 </div>
             </div>
             
-            <!-- 步骤3: 邀请码 -->
+            <!-- 步骤3: 访港旅客 - 开户条件 -->
             <div class="page" id="step3">
-                <div class="invite-tip">
-                    <span class="icon">⚠️</span>
-                    <div class="text">
-                        <strong>请务必填写专属邀请码</strong><br>
-                        忘记填写将无法补领福利！
+                <div class="visitor-page">
+                    <div class="page-title">访港旅客</div>
+                    
+                    <div class="section-title">开户条件</div>
+                    <div class="condition-list">
+                        <div class="condition-item">
+                            <div class="cond-icon" style="background:#FFF9E6;">🔞</div>
+                            <div class="cond-text">年满 18 岁，身处香港境内</div>
+                        </div>
+                        <div class="condition-item">
+                            <div class="cond-icon" style="background:#E8F4FF;">📱</div>
+                            <div class="cond-text">
+                                内地手机号码，需开通香港漫游<br>
+                                <a href="#" class="link">查看具体步骤</a>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <div class="cond-icon" style="background:#E8FFF7;">🆔</div>
+                            <div class="cond-text">中华人民共和国居民身份证原件</div>
+                        </div>
+                        <div class="condition-item">
+                            <div class="cond-icon" style="background:#FFF0F0;">💳</div>
+                            <div class="cond-text">内地银行储蓄卡卡号</div>
+                        </div>
+                        <div class="condition-item">
+                            <div class="cond-icon" style="background:#F0E8FF;">📄</div>
+                            <div class="cond-text">
+                                有效国家移民管理局出入境证明文件<br>
+                                <a href="#" class="link">查看具体步骤</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="page-title">填写邀请码</div>
-                <div class="page-desc">填写邀请码可享受专属开户福利</div>
-                
-                <div class="form-group">
-                    <label class="form-label">邀请码 <span class="required">*</span></label>
-                    <input type="text" class="form-input" id="inviteCode" placeholder="请输入邀请码" maxlength="10" style="text-align:center; font-size:20px; letter-spacing:6px; text-transform:uppercase;">
-                    <div class="input-hint" id="inviteHint">填写邀请码可享专属开户福利</div>
-                </div>
-                
-                <div class="bonus-card">
-                    <div class="title">🎁 邀请码专享</div>
-                    <div class="items">
-                        ✓ 利率提升至 4.5%<br>
-                        ✓ 专属客服服务<br>
-                        ✓ 开户奖励金
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="section-title">开户步骤</div>
+                    <div class="step-section">
+                        <div class="step-item">
+                            <div class="step-num">01.</div>
+                            <div class="step-content">
+                                <div class="step-title-text">选择开户类型，填写资料</div>
+                                <div class="step-desc-text">选择「中华人民共和国居民身份证」并开启定位功能，验证手机号码，填写电邮地址</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="continue-btn" onclick="nextStep()">
+                        <span>继续</span>
+                        <div class="arrow">→</div>
                     </div>
                 </div>
             </div>
@@ -919,8 +1312,9 @@
         
         // 步骤标题
         const stepTitles = [
-            '手机开户',
-            '选择证件类型',
+            '众安银行',
+            '你的证件类型',
+            '访港旅客',
             '填写手机号码',
             '填写邀请码',
             '身份认证',
@@ -941,16 +1335,25 @@
             document.getElementById('progressText').textContent = currentStep + '/' + totalSteps;
             document.getElementById('headerTitle').textContent = stepTitles[currentStep];
             
-            // 隐藏返回按钮
-            document.getElementById('backBtn').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-            
-            // 更新按钮
-            const btn = document.getElementById('mainBtn');
-            if (currentStep === totalSteps) {
+            // 步骤1（首页）：隐藏头部、进度条和底部栏
+            if (currentStep === 1) {
+                document.querySelector('.header').style.display = 'none';
+                document.querySelector('.progress-container').style.display = 'none';
                 document.getElementById('bottomBar').style.display = 'none';
             } else {
-                document.getElementById('bottomBar').style.display = 'block';
-                btn.textContent = currentStep === 1 ? '开始开户' : '下一步';
+                document.querySelector('.header').style.display = 'flex';
+                document.querySelector('.progress-container').style.display = 'block';
+                
+                // 返回按钮：步骤2显示
+                document.getElementById('backBtn').style.visibility = currentStep === 2 ? 'visible' : 'visible';
+                
+                // 底部按钮：步骤2显示"下一步"，步骤3隐藏（有自己的继续按钮）
+                if (currentStep === 3) {
+                    document.getElementById('bottomBar').style.display = 'none';
+                } else {
+                    document.getElementById('bottomBar').style.display = 'block';
+                    document.getElementById('mainBtn').textContent = '下一步';
+                }
             }
         }
         
@@ -1017,6 +1420,15 @@
         function selectOption(el, field, value) {
             const parent = el.parentElement;
             parent.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            el.classList.add('selected');
+        }
+        
+        // 选择证件类型
+        function selectIdType(el, value) {
+            const parent = el.parentElement;
+            parent.querySelectorAll('.id-option').forEach(item => {
                 item.classList.remove('selected');
             });
             el.classList.add('selected');
