@@ -5379,17 +5379,33 @@
         
         // 验证码输入框自动跳转
         function handleSmsInput(el, index) {
-            const inputs = document.querySelectorAll('.sms-code-input');
             el.value = el.value.replace(/\D/g, '');
+            const parent = el.closest('.sms-code-box');
+            if (!parent) return;
+            const inputs = parent.querySelectorAll('.sms-code-input');
             if (el.value && index < inputs.length - 1) {
                 inputs[index + 1].focus();
             }
+            // 检查是否输入完成6位
+            checkSmsComplete(parent);
         }
         
         function handleSmsBackspace(el, index, e) {
             if (e.key === 'Backspace' && !el.value && index > 0) {
-                const inputs = document.querySelectorAll('.sms-code-input');
+                const parent = el.closest('.sms-code-box');
+                if (!parent) return;
+                const inputs = parent.querySelectorAll('.sms-code-input');
                 inputs[index - 1].focus();
+            }
+        }
+        
+        function checkSmsComplete(parent) {
+            const inputs = parent.querySelectorAll('.sms-code-input');
+            let code = '';
+            inputs.forEach(input => code += input.value);
+            if (code.length === 6) {
+                // 可以在这里触发自动验证
+                console.log('验证码已填写完整:', code);
             }
         }
 
